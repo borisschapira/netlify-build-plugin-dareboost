@@ -1,0 +1,22 @@
+{
+  "name": "netlify-build-plugin-dareboost",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "netlify",
+    "netlify-plugin"
+  ],
+  "repository": "borisschapira/netlify-build-plugin-dareboost",
+  "bugs": {
+    "url": "https://github.com/borisschapira/netlify-build-plugin-dareboost/issues"
+  },
+  "author": "Boris Schapira",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  }
+}
