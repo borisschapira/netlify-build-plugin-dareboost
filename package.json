@@ -1,6 +1,6 @@
 {
   "name": "netlify-build-plugin-dareboost",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,8 @@
   },
   "keywords": [
     "netlify",
-    "netlify-plugin"
+    "netlify-plugin",
+    "dareboost"
   ],
   "repository": "borisschapira/netlify-build-plugin-dareboost",
   "bugs": {
