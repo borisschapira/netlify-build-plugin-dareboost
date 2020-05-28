@@ -8,3 +8,7 @@ inputs:
     description: The ids of the User Journey monitors relevant to the build, separated by a coma. If neither this nor monitoringIds are defined, the event will be considered global.
     default: ""
     required: false
+  - name: configurations
+    description: If your plan contains API credits, the configurations of the evaluations to be carried out once the build is successful.
+    default: []
+    required: false
