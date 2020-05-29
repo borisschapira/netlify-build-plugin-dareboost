@@ -18,7 +18,7 @@ const callAPI = async function (route, postData, token) {
   );
 
   try {
-    const { status, statusText } = await fetch(
+    const fetchResult = await fetch(
       `https://www.dareboost.com/api/0.6${route}`,
       {
         method: "POST",
@@ -28,14 +28,18 @@ const callAPI = async function (route, postData, token) {
         body: JSON.stringify(Object.assign({ token: token }, postData)),
       }
     );
+    const fetchData = await fetchResult.json();
+
+    const { status, statusText } = fetchResult;
 
     if (status != 200) {
       return failPlugin(
         `Dareboost: error while calling the route "${route}". Error: ${statusText}`
       );
-    } else {
-      console.log(`Dareboost: calling route "${route}" => Success`);
     }
+
+    console.log(`Dareboost: calling route "${route}" => Success`);
+    return fetchData;
   } catch (error) {
     return failPlugin(
       `Dareboost: error while calling the route "${route}". Error:`,
@@ -48,6 +52,7 @@ module.exports = {
   async onSuccess({
     utils: {
       build: { failPlugin },
+      status: { show },
     },
     inputs: { monitoringIds, scenarioIds, configurations },
   }) {
@@ -73,14 +78,32 @@ module.exports = {
 
     await callAPI("/event/create", postBody, DAREBOOST_API_TOKEN);
 
+    let showMessage = {
+      title: "Dareboost Build Plugin",
+      summary: "Monitoring event created.",
+      text: "",
+    };
+
     if (configurations.length) {
       for (let index = 0; index < configurations.length; index++) {
-        await callAPI(
+        const { reportId } = await callAPI(
           "/analysis/launch",
           configurations[index],
           DAREBOOST_API_TOKEN
         );
+
+        if (index == 0) {
+          showMessage.summary += " Analyses launched:";
+        } else {
+          showMessage.text += "\n";
+        }
+        showMessage.text += ` - for ${configurations[index].url}`;
+        if (configurations[index].browser && configurations[index].browser.name)
+          showMessage.text += ` (${configurations[index].browser.name})`;
+        showMessage.text += `\n   report URL: https://www.dareboost.com/en/loading/audit?reportIds=${reportId}`;
       }
     }
+
+    show(showMessage);
   },
 };
