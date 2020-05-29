@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/netlify-build-plugin-dareboost.svg)](https://badge.fury.io/js/netlify-build-plugin-dareboost)
+
 # Dareboost Netlify Build Plugin
 
 **You need [a Dareboost plan](https://www.dareboost.com/en/offers) to enjoy this plugin**
