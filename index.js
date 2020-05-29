@@ -60,7 +60,6 @@ module.exports = {
       );
 
     let postBody = {
-      token: DAREBOOST_API_TOKEN,
       key: `build-${COMMIT_REF.slice(0, 8)}`,
       text: `Netlify build from commit ${COMMIT_REF}`,
       date: new Date().toISOString(),
