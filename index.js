@@ -51,12 +51,9 @@ module.exports = {
     },
     inputs: { monitoringIds, scenarioIds, configurations },
   }) {
-    if (DAREBOOST_API_TOKEN && DAREBOOST_API_TOKEN.length == 0)
+    if (!DAREBOOST_API_TOKEN)
       return failPlugin(
-        "Dareboost: please define your DAREBOOST_API_TOKEN as en environment variable.",
-        {
-          error,
-        }
+        "Dareboost: please define your DAREBOOST_API_TOKEN as en environment variable."
       );
 
     let postBody = {
