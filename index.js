@@ -56,10 +56,17 @@ module.exports = {
     },
     inputs: { monitoringIds, scenarioIds, configurations },
   }) {
-    if (!DAREBOOST_API_TOKEN)
+    // Token validation
+    if (!DAREBOOST_API_TOKEN) {
       return failPlugin(
-        "Dareboost: please define your DAREBOOST_API_TOKEN as en environment variable."
+        [
+          "A Dareboost subscription is required to use this plugin.",
+          "If you do have a plan, please define your DAREBOOST_API_TOKEN as en environment variable.",
+          "- get your token at https://www.dareboost.com/en/profile/api",
+          "- define the variable in Netlify https://docs.netlify.com/configure-builds/environment-variables/#declare-variables",
+        ].join("\n")
       );
+    }
 
     let postBody = {
       key: `build-${COMMIT_REF.slice(0, 8)}`,
