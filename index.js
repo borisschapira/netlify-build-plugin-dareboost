@@ -81,7 +81,7 @@ module.exports = {
     let showMessage = {
       title: "Dareboost Build Plugin",
       summary: "Monitoring event created.",
-      text: "",
+      text: "Visualize your event on https://www.dareboost.com/en/trackings",
     };
 
     if (configurations.length) {
@@ -94,6 +94,7 @@ module.exports = {
 
         if (index == 0) {
           showMessage.summary += " Analyses launched:";
+          showMessage.text = "";
         } else {
           showMessage.text += "\n";
         }
